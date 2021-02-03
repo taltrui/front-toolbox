@@ -26,11 +26,11 @@ const apk: CommandType = async (config, utility, env, input, flags) => {
   );
 
   child.stdout.on("data", (data) => {
-    console.log(data);
+    console.log(`${data}`);
   });
 
   child.stderr.on("data", (data) => {
-    console.error(data);
+    console.log(`${data}`);
   });
 
   child.on("close", (code) => {

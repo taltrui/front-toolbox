@@ -7,7 +7,7 @@ const sync: CommandType = async (config, utility, env, input, flags) => {
     return;
   }
 
-  console.info(`\n Syncing ${utility} ${env} assets...`);
+  console.info(`\nSyncing ${utility} ${env} assets...`);
 
   const { assetsDest, assetsSrc } = config;
 

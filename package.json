@@ -1,6 +1,6 @@
 {
   "name": "front-end-utils",
-  "version": "1.21.0",
+  "version": "1.22.0",
   "author": "Tomás Altrui",
   "license": "MIT",
   "main": "dist/index.js",

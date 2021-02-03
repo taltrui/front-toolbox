@@ -8,7 +8,7 @@ const env: CommandType = async (config, utility, env, _, flags) => {
     return;
   }
 
-  validateParams(config, utility, env);
+  validateParams(config, env, utility);
 
   createEnvFile({
     ...assembleAppEnv(env, utility, config),

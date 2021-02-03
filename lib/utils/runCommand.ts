@@ -36,8 +36,7 @@ const runCommand = async (
   }
 
   const config = await readConfig("ftconfig.json");
-
-  console.log(input);
+  
   command(
     config,
     input[1],

@@ -11,16 +11,20 @@ const ios: CommandType = async (config, utility, env, input, flags) => {
   await createEnv(config, utility, env, input, flags);
   await syncAssets(config, utility, env, input, flags);
 
-  const { iosConfig } = config;
+  const { androidConfig } = config;
 
-  const iosConfigToUse = iosConfig[utility][env];
+  const androidConfigToUse = androidConfig[env];
+
+  const utilityVariant = capitalize(utility);
 
   const child = spawn("yarn", [
     "run",
     "react-native",
-    "run-ios",
-    `--scheme ${iosConfigToUse.scheme}`,
-    `--configuration Debug.${iosConfigToUse.config}`,
+    "run-android",
+    `--variant=${androidConfigToUse.variant}${utilityVariant}Debug`,
+    `${
+      androidConfigToUse.suffix && `--appIdSuffix=${androidConfigToUse.suffix}`
+    }`,
     ...(input || []),
   ]);
 

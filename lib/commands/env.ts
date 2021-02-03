@@ -10,10 +10,13 @@ const env: CommandType = async (config, utility, env, _, flags) => {
 
   validateParams(config, env, utility);
 
+  console.info(`\nCreating ${utility} ${env} environment...`);
   createEnvFile({
     ...assembleAppEnv(env, utility, config),
     ...(flags?.debug ? { DEBUG_APP: true } : {}),
   });
+
+  console.info(`\n${utility} ${env} environment created succesfully.`);
 };
 
 export default env;

@@ -18,21 +18,30 @@ const apk: CommandType = async (config, utility, env, input, flags) => {
   const utilityVariant = capitalize(utility);
   const variant = capitalize(androidConfigToUse.variant);
 
+  console.info(`\nStarting ${utility} ${env} apk creation...\n`);
+
   const child = spawn(
     `cd android && ./gradlew clean && ./gradlew assemble${variant}${utilityVariant}Release`,
     { shell: true }
   );
 
   child.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
+    console.log(data);
   });
 
   child.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
+    console.error(data);
   });
 
   child.on("close", (code) => {
-    console.log(`child process exited with code ${code}`);
+    if (code === 0) {
+      console.info(
+        `\n${utility} ${env} ${flags.platform} apk created succesfully\n`
+      );
+    } else
+      console.log(
+        `There was an error, you can read more above. Exit code: ${code}`
+      );
   });
 };
 

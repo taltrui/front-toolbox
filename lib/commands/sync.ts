@@ -7,6 +7,8 @@ const sync: CommandType = async (config, utility, env, input, flags) => {
     return;
   }
 
+  console.info(`\n Syncing ${utility} ${env} assets...`);
+
   const { assetsDest, assetsSrc } = config;
 
   const formattedSrc = formatAssetsSrc(utility, assetsSrc);
@@ -14,6 +16,8 @@ const sync: CommandType = async (config, utility, env, input, flags) => {
   await deleteFiles(assetsDest);
 
   await copy(formattedSrc, assetsDest);
+
+  console.info(`\n${utility} ${env} assets succesfully synced.`);
 };
 
 export default sync;

@@ -17,6 +17,8 @@ const ios: CommandType = async (config, utility, env, input, flags) => {
 
   const utilityVariant = capitalize(utility);
 
+  console.info(`\nStarting ${utility} ${env} app...\n`);
+
   const child = spawn(
     "yarn",
     [
@@ -34,15 +36,20 @@ const ios: CommandType = async (config, utility, env, input, flags) => {
   );
 
   child.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
+    console.log(data);
   });
 
   child.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
+    console.error(data);
   });
 
   child.on("close", (code) => {
-    console.log(`child process exited with code ${code}`);
+    if (code === 0) {
+      console.info(`\n${utility} ${env} app started succesfully\n`);
+    } else
+      console.log(
+        `There was an error, you can read more above. Exit code: ${code}`
+      );
   });
 };
 

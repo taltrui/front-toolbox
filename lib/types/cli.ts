@@ -26,9 +26,14 @@ export type CommandType = (
   config: ConfigType,
   utility: string,
   env: string,
-  input?: string[],
-  flags?: {}
-) => void;
+  input: string[],
+  flags: {
+    debug?: boolean;
+    noEnv?: boolean;
+    noSync?: boolean;
+    platform: string;
+  }
+) => Promise<void>;
 
 export interface CommandsMapperType {
   [index: string]: CommandType;

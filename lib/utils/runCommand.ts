@@ -20,7 +20,12 @@ const commands: CommandsMapperType = {
 
 const runCommand = async (
   input: string[],
-  flags: { debug?: boolean; noEnv?: boolean; noSync?: boolean }
+  flags: {
+    debug?: boolean;
+    noEnv?: boolean;
+    noSync?: boolean;
+    platform: string;
+  }
 ) => {
   const command = commands[input[0]];
 
@@ -32,7 +37,13 @@ const runCommand = async (
 
   const config = await readConfig("ftconfig.json");
 
-  command(config, input[1], input[2], input.slice(3, input.length), flags);
+  command(
+    config,
+    input[1],
+    input[2],
+    input.slice(3, input.length) || [],
+    flags
+  );
 
   console.log(flags);
 };

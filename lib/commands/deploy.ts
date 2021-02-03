@@ -29,13 +29,11 @@ const deploy: CommandType = async (config, utility, env, input, flags) => {
     GIT_CERTS_URL,
   };
 
-  const child = spawn("bundle", [
-    "exec",
-    "fastlane",
-    flags.platform,
-    "deploy",
-    ...(input || []),
-  ]);
+  const child = spawn(
+    "bundle",
+    ["exec", "fastlane", flags.platform, "deploy", ...(input || [])],
+    { shell: true }
+  );
 
   child.stdout.on("data", (data) => {
     console.log(`stdout: ${data}`);

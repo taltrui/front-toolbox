@@ -19,7 +19,8 @@ const apk: CommandType = async (config, utility, env, input, flags) => {
   const variant = capitalize(androidConfigToUse.variant);
 
   const child = spawn(
-    `cd android && ./gradlew clean && ./gradlew assemble${variant}${utilityVariant}Release`
+    `cd android && ./gradlew clean && ./gradlew assemble${variant}${utilityVariant}Release`,
+    { shell: true }
   );
 
   child.stdout.on("data", (data) => {

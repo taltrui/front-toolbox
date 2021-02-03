@@ -17,16 +17,21 @@ const android: CommandType = async (config, utility, env, input, flags) => {
 
   const utilityVariant = capitalize(utility);
 
-  const child = spawn("yarn", [
-    "run",
-    "react-native",
-    "run-android",
-    `--variant=${androidConfigToUse.variant}${utilityVariant}Debug`,
-    `${
-      androidConfigToUse.suffix && `--appIdSuffix=${androidConfigToUse.suffix}`
-    }`,
-    ...(input || []),
-  ]);
+  const child = spawn(
+    "yarn",
+    [
+      "run",
+      "react-native",
+      "run-android",
+      `--variant=${androidConfigToUse.variant}${utilityVariant}Debug`,
+      `${
+        androidConfigToUse.suffix &&
+        `--appIdSuffix=${androidConfigToUse.suffix}`
+      }`,
+      ...(input || []),
+    ],
+    { shell: true }
+  );
 
   child.stdout.on("data", (data) => {
     console.log(`stdout: ${data}`);

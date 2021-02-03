@@ -8,18 +8,18 @@ const validateParams = (
 ): void => {
   const { environments, utilities } = config;
 
-  if (!environments.includes(env)) {
+  if (!utilities.includes(utility)) {
     console.error(
-      `"${env}" is a valid environment. Available environments are: ${environments.join(
+      `"${utility}" is not a valid utility. Available utilities are: ${utilities.join(
         ", "
       )}`
     );
     exit(1);
   }
 
-  if (!utilities.includes(utility)) {
+  if (!environments.includes(env)) {
     console.error(
-      `"${utility}" is not a valid utility. Available utilities are: ${utilities.join(
+      `"${env}" is not a valid environment. Available environments are: ${environments.join(
         ", "
       )}`
     );
